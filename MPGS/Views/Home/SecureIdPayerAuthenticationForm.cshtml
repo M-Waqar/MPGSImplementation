@@ -1,0 +1,26 @@
+﻿@using MPGS.Models
+@model MPGS.Models.SecureIdEnrollmentResponseModel
+
+@{
+    ViewBag.Title = "SecureIdPayerAuthenticationForm";
+}
+
+<div style="margin-top: 100px;" class="contents col-12 mt-4">
+    @Html.Raw(Model.AcsUrl)
+</div>
+
+     @*Populate the form action attribute with the value returned in the 3DSecure.authenticationRedirect.customized.acsUrl response parameter 
+    <div style="margin-top: 100px;" class="contents col-9 mt-4">
+        <form name="3dsRedirect" action="@Model.AcsUrl" method="POST" samesite="None" accept-charset="UTF-8">
+            <p>This is the ACS redirection page. In your integration you should redirect the payer automatically.</p>
+             Populate the mandatory PaReq parameter with the value returned in the 3DSecure.authenticationRedirect.customized.paReq response parameter.
+            <input type="hidden" name="PaReq" value="@Model.PaReq" />
+             Populate the mandatory TermUrl value with the URL to which you want the payer returned when the authentication process has completed. This should be the same value as supplied in the 3DSecure.authenticationRedirect.responseUrl  parameter to the CHECK_ENROLLMENT request.
+            <input type="hidden" name="TermUrl" value="@Model.ResponseUrl" />
+             The ACS will echo the contents of the mandatory MD parameter when the payer is returned to the URL specified in the TermUrl parameter.  You can use this parameter to establish a link between the ACS request and response.
+            <input type="hidden" name="MD" value="@Model.MdValue}" />
+            <button class="btn btn-primary">Click here to continue</button>
+        </form>
+    </div>*@
+
+

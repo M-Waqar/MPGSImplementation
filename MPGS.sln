@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPGS", "MPGS\MPGS.csproj", "{C11578B1-0396-48D2-94CC-0F9EBCAC80B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C11578B1-0396-48D2-94CC-0F9EBCAC80B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11578B1-0396-48D2-94CC-0F9EBCAC80B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11578B1-0396-48D2-94CC-0F9EBCAC80B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11578B1-0396-48D2-94CC-0F9EBCAC80B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B342BA72-C6F0-4436-8CAE-DCF97F4D6F68}
+	EndGlobalSection
+EndGlobal

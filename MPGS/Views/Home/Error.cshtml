@@ -1,0 +1,66 @@
+﻿@model MPGS.Models.ErrorViewModel
+<div class="col-9 pl-4">
+    <h3>Error</h3>
+    @if (!String.IsNullOrEmpty(Model.RequestId))
+    {
+        <p>
+            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+        </p>
+    }
+    <div class="container mt-4 ml-0">
+        @if (!String.IsNullOrEmpty(Model.Cause))
+        {
+            <div class="row">
+                <div class="col">Cause</div>
+                <div class="col">
+                    <p>@Model.Cause</p>
+                </div>
+            </div>
+        }
+        @if (!String.IsNullOrEmpty(Model.Message))
+        {
+            <div class="row">
+                <div class="col">Message</div>
+                <div class="col">
+                    <p>@Model.Message</p>
+                </div>
+            </div>
+        }
+        @if (!String.IsNullOrEmpty(Model.ErrorCode))
+        {
+            <div class="row">
+                <div class="col">Error code</div>
+                <div class="col">
+                    <p>@Model.ErrorCode</p>
+                </div>
+            </div>
+        }
+        @if (!String.IsNullOrEmpty(Model.Explanation))
+        {
+            <div class="row">
+                <div class="col">Explanation</div>
+                <div class="col">
+                    <p>@Model.Explanation</p>
+                </div>
+            </div>
+        }
+        @if (!String.IsNullOrEmpty(Model.Field))
+        {
+            <div class="row">
+                <div class="col">Field</div>
+                <div class="col">
+                    <p>@Model.Field</p>
+                </div>
+            </div>
+        }
+        @if (!String.IsNullOrEmpty(Model.ValidationType))
+        {
+            <div class="row">
+                <div class="col">Validation type</div>
+                <div class="col">
+                    <p>@Model.ValidationType</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

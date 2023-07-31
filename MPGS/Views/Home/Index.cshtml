@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Hosted Checkout";
+}
+
+<head>
+    <script src="https://test-gateway.mastercard.com/checkout/version/61/checkout.js" data-error="errorCallback" data-cancel="cancelCallback"></script>
+</head>
+
+<div class="jumbotron">
+    <h1>MPGS</h1>
+    <p class="lead">Implementing a Hosted Checkout Integration</p>
+    <p>Prerequisites:</p>
+    <ul>
+        <li>
+            Ensure that your merchant profile is enabled for the Hosted Checkout service.
+        </li>
+        <li>
+            It is recommended that you opt for the Notifications service to receive notifications (email/Webhook) if the payment is successful. The gateway (on behalf of you) can also send email notifications to the payer.
+        </li>
+    </ul>
+    <p><a href="https://ap-gateway.mastercard.com/api/documentation/integrationGuidelines/hostedCheckout/integrationModelHostedCheckout.html?locale=en_US#x_setupHCO" target="_blank" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <h2>Hosted Checkout Interaction.</h2>
+        <input id="lightbox-with-session" class="mt-4 btn btn-primary" type="button" value="Pay with Lightbox" onclick="Checkout.showLightbox();" />
+        <input id="page-with-session" class="mt-4 btn btn-primary" type="button" value="Pay with Payment Page" onclick="Checkout.showPaymentPage();" />
+    </div>
+</div>
+
+<script src="https://test-gateway.mastercard.com/checkout/version/61/checkout.js"
+        data-cancel="cancelCallback"
+        data-beforeRedirect="Checkout.saveFormFields"
+        data-afterRedirect="Checkout.restoreFormFields">
+</script>
+
+<script type="text/javascript">
+
+        function errorCallback(error) {
+            var message = JSON.stringify(error);
+            $("#loading-bar-spinner").hide();
+            var $errorAlert = $('#error-alert');
+            console.log(message);
+            $errorAlert.append("<p>" + message + "</p>");
+            $errorAlert.show();
+    }
+
+    @*/*<![CDATA[*/
+        var merchantId = "@ViewBag.MerchantId";
+        var sessionId = "@ViewBag.CheckoutSession.Id";
+        var sessionVersion = "@ViewBag.CheckoutSession.Version";
+        var successIndicator = "@ViewBag.CheckoutSession.SuccessIndicator";
+        var orderId = "@ViewBag.OrderId";
+        var currency = "@ViewBag.Currency";
+    /*]]>*/
+        var resultIndicator = null;
+
+    // This method preserves the current state of successIndicator and orderId, so they're not overwritten when we return to this page after redirect
+    function beforeRedirect() {
+    console.log("beforeRedirect");
+        return {
+            successIndicator: successIndicator,
+            orderId: orderId
+        };
+    }*@
+
+
+    //function afterRedirect(data) {
+    //    console.log("afterRedirect", data);
+    //    // Compare with the resultIndicator saved in the completeCallback() method
+    //    if (resultIndicator === "CANCELED") {
+    //        return;
+    //    }
+    //    else if (resultIndicator) {
+    //        var result = (resultIndicator === data.successIndicator) ? "SUCCESS" : "ERROR";
+    //        window.location.href = "/hostedCheckout/" + data.orderId + "/" + result;
+    //    }
+    //    else {
+    //        successIndicator = data.successIndicator;
+    //        orderId = data.orderId;
+    //        sessionId = data.sessionId;
+    //        sessionVersion = data.sessionVersion;
+    //        merchantId = data.merchantId;
+
+    //        window.location.href = "/hostedCheckout/" + data.orderId + "/" + data.successIndicator + "/" + data.sessionId;
+    //    }
+
+    //}
+
+        function cancelCallback() {
+            console.log('Payment cancelled');
+            resultIndicator = "CANCELED";
+            // Reload the page to generate a new session ID - the old one is out of date as soon as the lightbox is invoked
+            window.location.reload(true);
+    }
+
+    @*Checkout.configure({
+
+        merchant: 'TEST999999955',
+        order: {
+            amount: 1.00,
+            currency: 'AED',
+            description: 'Ordered goods'
+        },
+            session: {
+                id: '@ViewBag.SessionID'
+            },
+            interaction: {
+                merchant: {
+                    name: 'TIYBR',
+                    address: {
+                        line1: '200 Sample St',
+                        line2: '1234 Example Town'
+                    }
+                }
+            }
+    });*@
+
+    Checkout.configure({
+        merchant: 'TEST999999955',
+        order: {
+            amount: 1.00,
+            currency: 'AED',
+            description: 'Ordered goods'
+        },
+        session: {
+            id: '@ViewBag.SessionID'
+        },
+        billing: {
+            address: {
+                street: '123 Customer Street',
+                city: 'Metropolis',
+                postcodeZip: '99999',
+                stateProvince: 'NY',
+                country: 'USA'
+            }
+        },
+        interaction: {
+            merchant: {
+                name: 'Your merchant name',
+                address: {
+                    line1: '200 Sample St',
+                    line2: '1234 Example Town'
+                },
+                email: 'order@yourMerchantEmailAddress.com',
+                phone: '+1 123 456 789 012',
+                logo: 'https://imageURL'
+            },
+            locale: 'en_US',
+            /*theme: 'default',*/
+            displayControl: {
+                billingAddress: 'HIDE',
+                customerEmail: 'HIDE',
+                orderSummary: 'HIDE',
+                shipping: 'HIDE'
+            }
+        }
+    });
+
+</script>
